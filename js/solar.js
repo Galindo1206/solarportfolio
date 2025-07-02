@@ -24,8 +24,8 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   const whooshSound = new Audio("assets/sounds/woosh.mp3");
-  const solSound = new Audio("assets/sounds/...");
-  const planetSound = new Audio("assets/sounds/...");
+  const solSound = new Audio("assets/sounds/woosh.mp3");
+  const planetSound = new Audio("assets/sounds/woosh.mp3");
   const clickSound = new Audio("assets/sounds/click.mp3");
 
   window.addEventListener("load", () => {
@@ -193,3 +193,27 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
+/*rocas espaciales*/
+function spawnFloatingRock() {
+  const rock = document.createElement('div');
+  rock.className = 'rock';
+
+  const size = 20 + Math.random() * 30; // tamaño entre 20px y 50px
+  rock.style.width = `${size}px`;
+  rock.style.height = `${size}px`;
+
+  rock.style.left = `${Math.random() * 100}vw`;
+  rock.style.top = `${Math.random() * 100}vh`;
+  rock.style.animationDuration = `${15 + Math.random() * 10}s`; // duración entre 15s y 25s
+
+  document.body.appendChild(rock);
+
+  setTimeout(() => rock.remove(), 30000); // eliminar tras 30s
+}
+
+// Generar una nueva roca cada 3 segundos
+setInterval(spawnFloatingRock, 3000);
+
+
+

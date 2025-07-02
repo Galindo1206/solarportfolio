@@ -370,14 +370,14 @@ body, html {
   position: fixed;
   top: 20%; left: 10%;
   width: 600px; height: 600px;
-  background: url('assets/img/nebula1.png') no-repeat center/cover;
+  background: url('../assets/img/nebula1.png') no-repeat center/cover;
   opacity: 0.2;
   mix-blend-mode: screen;
   animation: floatNebula 30s infinite alternate;
   pointer-events: none;
 }
 
-.nebula2 { top: 60%; left: 70%; background-image: url('assets/img/nebula2.png'); animation-duration: 45s; }
+.nebula2 { top: 60%; left: 70%; background-image: url('../assets/img/nebula2.png'); animation-duration: 45s; }
 
 @keyframes floatNebula {
   0% { transform: translate(0,0) scale(1); }
@@ -439,7 +439,27 @@ body, html {
   cursor:pointer;
   z-index:9999;
 }
+/*rocas*/
+.rock {
+  position: fixed;
+  background: url('../assets/img/rock.png') no-repeat center/cover;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  animation: driftRock linear infinite;
+}
 
+@keyframes driftRock {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50px, -50px) rotate(360deg);
+    opacity: 0.3;
+  }
+}
 
 
 
