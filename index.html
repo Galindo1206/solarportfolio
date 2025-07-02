@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,17 +8,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
 </head>
 <body>
+   <!--nave espacial -->
+
+  <img src="assets/img/rocket.png" class="rocket" alt="Rocket">
+
+ <!--texto flotante -->
+  <div class="space-fact" style="top: 30vh; left: 80vw;">“Hello from Space”</div>
+
+   <!--cometas -->
+
+  <div class="comet-layer"></div>
+
+
+  <!-- Fondo galáctico + estrellas -->
+  <div class="space-bg"></div>
   <div class="starry-bg"></div>
+     <!-- nebulas -->
+<div class="nebula nebula1"></div>
+<div class="nebula nebula2"></div>
   <div class="meteors"></div>
 
-  <div class="space-bg"></div>
-
+  <!-- Meteoritos adicionales por CSS base -->
   <div class="meteor-layer">
     <div class="meteor"></div>
     <div class="meteor"></div>
     <div class="meteor"></div>
   </div>
 
+  <!-- Sistema solar -->
   <main id="solar-view" class="solar-system">
     <div class="sun" data-label="Sol">
       <h1>[Tu Nombre]</h1>
@@ -34,16 +51,30 @@
     <div class="tech-label" style="top: 30%; left: 10%;">SEO</div>
 
     <div class="orbit orbit1">
-      <div class="planet planetmercury" data-label="Proyectos"></div>
+  <div class="planet-container">
+    <div class="planet planetmercury" data-label="Proyectos">
     </div>
-    <div class="orbit orbit2">
-      <div class="planet planetvenus" data-label="Habilidades"></div>
+  </div>
+</div>
+<div class="orbit orbit2">
+  <div class="planet-container">
+    <div class="planet planetvenus" data-label="Habilidades">
     </div>
-    <div class="orbit orbit3">
-      <div class="planet planetearth" data-label="Servicios"></div>
+  </div>
+</div>
+<div class="orbit orbit3">
+  <div class="planet-container">
+    <div class="planet planetearth" data-label="Servicios">
+      <div class="moon-orbit">
+        <div class="moon"></div>
+         <div class="satellite"></div>
+      </div>
     </div>
+  </div>
+</div>
   </main>
 
+  <!-- Panel de información -->
   <section id="focus-view" class="hidden">
     <div class="astro-info">
       <h2 id="astro-title">Título del Objeto</h2>
@@ -57,6 +88,11 @@
 
   <script src="js/solar.js"></script>
 
-</body>
 
+ <!-- boton de música espacial -->
+<button id="music-btn">🎵</button>
+<audio id="bg-music" src="assets/sounds/space.mp3" loop></audio>
+
+
+</body>
 </html>
