@@ -1,0 +1,310 @@
+/* Reset básico y estilo global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  overflow: visible;
+  font-family: 'Orbitron', sans-serif;
+  background: #000;
+  color: white;
+}
+
+/* Fondo galáctico con estrellas */
+.space-bg {
+  background: radial-gradient(ellipse at bottom, #0b0c1a 0%, #000 100%);
+  z-index: -10;
+}
+.space-bg,
+.space-bg::before,
+.space-bg::after {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+}
+
+.space-bg::before,
+.space-bg::after {
+  content: '';
+  background: url('https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/media/star.png') repeat;
+  background-size: 10px 10px;
+  opacity: 0.4;
+  animation: twinkle 10s infinite linear;
+  z-index: -11;
+}
+.space-bg::after {
+  animation-delay: 5s;
+  opacity: 0.2;
+}
+
+/* Meteoritos */
+.meteor-layer {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  z-index: -5;
+}
+.meteor {
+  position: absolute;
+  top: -50px;
+  width: 4px; height: 100px;
+  background: linear-gradient(white, transparent);
+  opacity: 0.4;
+  transform: rotate(45deg);
+  animation: meteorFall 7s linear infinite;
+}
+.meteor:nth-child(2) { left: 20%; animation-delay: 2s; }
+.meteor:nth-child(3) { left: 70%; animation-delay: 4s; }
+
+/* Sistema solar base */
+.solar-system {
+  position: relative;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  transition: transform 2s ease-in-out;
+  transform-origin: center;
+  z-index: 1;
+}
+.solar-system.paused .orbit {
+  animation-play-state: paused !important;
+}
+.solar-system.paused {
+  overflow: visible !important;
+}
+
+/* Zoom al Sol y enfoque planetas */
+.solar-system.focus-sol { transform: scale(2.5) translateX(20%); }
+.solar-system.focus-proyectos { transform: scale(2.5) translateX(25%); }
+.solar-system.focus-habilidades { transform: scale(2.5) translateX(20%); }
+.solar-system.focus-servicios { transform: scale(2.5) translateX(15%); }
+.solar-system.focused-planet { transform: scale(4) translateX(30%); }
+
+/* Sol */
+@keyframes solar-glow {
+  0%, 100% { box-shadow: 0 0 60px rgba(255, 204, 0, 0.6); }
+  50% { box-shadow: 0 0 90px rgba(255, 204, 0, 0.9); }
+}
+
+.sun {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px; height: 200px;
+  background: url('../assets/textures/sun.jpg') no-repeat center/cover;
+  border-radius: 50%;
+  display: flex;
+  align-items: center; justify-content: center;
+  box-shadow: 0 0 60px rgba(255,204,0,0.6);
+   animation: solar-glow 4s ease-in-out infinite;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Órbitas */
+.orbit {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border: 10px dashed rgba(255,255,255,0.2);
+  border-radius: 50%;
+  animation: rotate 60s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.orbit1 { width: 400px; height: 400px; transform: translate(-50%, -50%) rotate(30deg); }
+.orbit2 { width: 600px; height: 600px; transform: translate(-50%, -50%) rotate(120deg); }
+.orbit3 { width: 850px; height: 850px; transform: translate(-50%, -50%) rotate(210deg); }
+.orbit4 { width: 1100px; height: 1100px; transform: translate(-50%, -50%) rotate(300deg); }
+
+/* Planetas base */
+.planet {
+  pointer-events: auto;
+  position: absolute;
+  top: 50%; left: 0;
+  transform: translateY(-50%);
+  background: #3cf;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #0ff;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 1s ease-in-out;
+}
+.planet::after {
+  content: attr(data-label);
+  position: absolute;
+  top: -30px; left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.planet:hover::after { opacity: 1; }
+
+/* Tamaños específicos */
+.planetmercury { width: 50px; height: 50px;
+background: url('../assets/img/planet1.png') no-repeat center/cover; }
+.planetvenus   { width: 70px; height: 70px;
+background: url('../assets/img/planet2.png') no-repeat center/cover; }
+.planetearth   { width: 90px; height: 90px;
+background: url('../assets/img/planet3.png') no-repeat center/cover; }
+
+/* Texturas planetarias */
+.clone[data-label="Proyectos"] {
+  background: url('../assets/textures/mercury.jpg') no-repeat center/cover;
+}
+.clone[data-label="Habilidades"] {
+  background: url('../assets/textures/venus.jpg') no-repeat center/cover;
+}
+.clone[data-label="Servicios"] {
+  background: url('../assets/textures/earth.jpg') no-repeat center/cover;
+}
+
+
+/* Clones de planetas (al hacer click) */
+.clone {
+  position: fixed;
+  z-index: 200;
+  border-radius: 50%;
+  pointer-events: none;
+  background-size: cover !important;
+  background-position: center !important;
+  animation: planet-rotate 40s linear infinite, planet-glow 3s ease-in-out infinite;
+}
+
+/* Ocultar planeta original al hacer zoom */
+.solar-system.paused .planet {
+  opacity: 0;
+}
+
+/* Animación de planetas */
+@keyframes planet-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes planet-glow {
+  0%, 100% { box-shadow: 0 0 20px #0ff; }
+  50% { box-shadow: 0 0 40px #0ff; }
+}
+
+/* Etiquetas flotantes */
+.tech-label {
+  position: absolute;
+  font-size: 0.85rem;
+  background: rgba(0,204,255,0.1);
+  color: #00ccff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  pointer-events: none;
+  animation: float 6s infinite ease-in-out;
+  z-index: 1;
+}
+
+/* Panel informativo */
+#focus-view {
+  position: fixed;
+  top: 0; left: 0;
+  width: 50vw; height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: linear-gradient(to right, rgba(0,0,0,0.95), transparent);
+  z-index: 150;
+}
+#focus-view.hidden { display: none !important; }
+#focus-view::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 10%;
+  height: 80%; width: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.astro-info {
+  max-width: 90%;
+  font-size: 1.1rem;
+}
+.astro-info h2 { font-size: 2rem; margin-bottom: 15px; color: #00ccff; }
+.astro-info p { line-height: 1.6; margin-bottom: 20px; }
+#back-button {
+  background: #00ccff;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#back-button:hover { background: #0099cc; }
+.astro-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.astro-image img {
+  width: 160%;
+  transform: translateX(25%);
+  object-fit: contain;
+}
+
+
+
+/* Estrellas */
+.star {
+  position: absolute;
+  width: 4px;           /* antes 2px */
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px white;  /* brillo extra */
+  animation: twinkle-star 2.5s ease-in-out infinite, drift 60s linear infinite;
+}
+
+.starry-bg {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -5;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-10px, 10px);
+  }
+}
+@keyframes twinkle-star {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+
+/* Meteoritos */
+.meteors {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -4;
+}
+.meteor {
+  position: absolute;
+  width: 2px; height: 60px;
+    background: linear-gradient(white, transparent);
+  transform: rotate(45deg);
+  opacity: 0;
+  animation: meteorFallSky 3s linear infinite;
+}
+@keyframes meteorFallSky {
+  0%   { opacity: 0; transform: translate(0, 0); }
+  10%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(100vw, 100vh); }
+}
+

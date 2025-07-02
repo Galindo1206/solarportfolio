@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Universo – [Tu Nombre]</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="starry-bg"></div>
+  <div class="meteors"></div>
+
+  <div class="space-bg"></div>
+
+  <div class="meteor-layer">
+    <div class="meteor"></div>
+    <div class="meteor"></div>
+    <div class="meteor"></div>
+  </div>
+
+  <main id="solar-view" class="solar-system">
+    <div class="sun" data-label="Sol">
+      <h1>[Tu Nombre]</h1>
+      <p>Fullstack • WordPress • eCommerce</p>
+    </div>
+
+    <div class="tech-label" style="top: 10%; left: 20%;">HTML</div>
+    <div class="tech-label" style="top: 80%; left: 30%;">CSS</div>
+    <div class="tech-label" style="top: 20%; left: 70%;">JavaScript</div>
+    <div class="tech-label" style="top: 60%; left: 80%;">WordPress</div>
+    <div class="tech-label" style="top: 40%; left: 50%;">WooCommerce</div>
+    <div class="tech-label" style="top: 75%; left: 60%;">Laravel</div>
+    <div class="tech-label" style="top: 30%; left: 10%;">SEO</div>
+
+    <div class="orbit orbit1">
+      <div class="planet planetmercury" data-label="Proyectos"></div>
+    </div>
+    <div class="orbit orbit2">
+      <div class="planet planetvenus" data-label="Habilidades"></div>
+    </div>
+    <div class="orbit orbit3">
+      <div class="planet planetearth" data-label="Servicios"></div>
+    </div>
+  </main>
+
+  <section id="focus-view" class="hidden">
+    <div class="astro-info">
+      <h2 id="astro-title">Título del Objeto</h2>
+      <p id="astro-desc">Aquí va la descripción del objeto estelar seleccionado.</p>
+      <button id="back-button">🔙 Volver al sistema</button>
+    </div>
+    <div class="astro-image">
+      <img id="astro-img" src="" alt="">
+    </div>
+  </section>
+
+  <script src="js/solar.js"></script>
+
+</body>
+
+</html>
